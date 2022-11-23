@@ -191,6 +191,10 @@ const config = defineConfig({
               text: '6. 조건문',
               link: '/blaze/guide/summary/if-unless.md',
             },
+            {
+              text: '7. 반복문',
+              link: '/blaze/guide/summary/each.md',
+            },
           ],
         },
         // {
