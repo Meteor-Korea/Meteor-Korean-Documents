@@ -200,6 +200,10 @@ const config = defineConfig({
               text: '반응형',
               link: '/router/api/reactivity.md'
             },
+            {
+              text: '변경',
+              link: '/router/api/tweaking.md'
+            },
           ]
         },
         {
