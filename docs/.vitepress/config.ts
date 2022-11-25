@@ -188,6 +188,10 @@ const config = defineConfig({
               text: '대안책',
               link: '/router/api/workarounds.md'
             },
+            {
+              text: '조작',
+              link: '/router/api/manipulation.md'
+            },
           ]
         },
         {
