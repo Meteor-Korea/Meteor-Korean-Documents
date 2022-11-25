@@ -184,6 +184,10 @@ const config = defineConfig({
               text: '일반적인 메서드',
               link: '/router/api/api-general.md'
             },
+            {
+              text: '대안책',
+              link: '/router/api/workarounds.md'
+            },
           ]
         },
         {
