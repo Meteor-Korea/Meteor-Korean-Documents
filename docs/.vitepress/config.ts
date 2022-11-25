@@ -204,6 +204,10 @@ const config = defineConfig({
               text: '변경',
               link: '/router/api/tweaking.md'
             },
+            {
+              text: '애드온 개발용',
+              link: '/router/api/for-dev.md'
+            },
           ]
         },
         {
