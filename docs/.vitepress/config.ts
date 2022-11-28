@@ -64,7 +64,7 @@ const config = defineConfig({
           },
           {
             text: 'Blaze 가이드',
-            link: '/styles/blaze.md',
+            link: '/styles/blaze-spacebars.md',
           },
           {
             text: 'CSS 가이드',
