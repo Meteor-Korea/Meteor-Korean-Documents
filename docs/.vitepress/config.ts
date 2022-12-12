@@ -219,6 +219,10 @@ const config = defineConfig({
               text: '서버 커넥션',
               link: '/meteor/api/server-connections.md'
             },
+            {
+              text: '컬렉션',
+              link: '/meteor/api/collections.md'
+            },
           ]
         },
       ],
