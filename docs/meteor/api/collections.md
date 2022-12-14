@@ -46,6 +46,33 @@ type option = {
     퍼블리쉬 함수로부터 반환된 `observeChanges`의 콜백 또는 커서에서는 적용되지 않습니다.
   - defineMutationMethods: 클라이언트 코드에서 삽입/업데이트/제거를 할 수 있는지 여부입니다.
     기본값은 `true`입니다.
+- `transform` 예제:
+```js
+// 'Animal' 클레스를 정의
+class Animal {
+  constructor(doc) {
+    _.extend(this, doc);
+  }
+
+  makeNoise() {
+    console.log(this.sound);
+  }
+}
+
+// 'Animals'을 문서로 사용하는 컬렉션을 정의
+const Animals = new Mongo.Collection('animals', {
+  transform: (doc) => new Animal(doc)
+});
+
+// 동물을 생성하고 `makeNoise` 메서드를 호출.
+Animals.insert({ name: 'raptor', sound: 'roar' });
+Animals.findOne({ name: 'raptor' }).makeNoise(); // 프린트 'roar'
+```
+  
+  `transform` 함수는 반응형에 호출되지 않습니다.
+  동적으로 변경되는 속성을 객체에 추가하려면,
+  호출된 시간에 값을 계산하는 함수로 수행해야 합니다.
+  `transform` 속성이 그 시간에 계산하지 않습니다.
 
 *****
 
@@ -59,10 +86,10 @@ type option = {
   서버의 해당 컬렉션에서 메서드를 호출하면 액세스 제어 규칙과 일치하는지 확인한 후,
   정상적인 Mongo 작업으로 직접 변환됩니다.
 
-  - 클라이언트(및 `connection`을 지정하는 경우 서버)에서 Minimongo 인스턴스가 생성됩니다.
-  Minimongo는 본질적으로 순수한 JavaScript로 Mongo를 메모리 내에서 비영구적으로 구현한 것입니다.
-  클라이언트에서 작업 중인 데이터베이스의 하위 집합만 저장하는 로컬 캐시 역할을 합니다.
-  이러한 컬렉션에 대한 쿼리(`find`)는 서버와 통신하지 않고 이 캐시에서 직접 제공됩니다.
+- 클라이언트(및 `connection`을 지정하는 경우 서버)에서 Minimongo 인스턴스가 생성됩니다.
+Minimongo는 본질적으로 순수한 JavaScript로 Mongo를 메모리 내에서 비영구적으로 구현한 것입니다.
+클라이언트에서 작업 중인 데이터베이스의 하위 집합만 저장하는 로컬 캐시 역할을 합니다.
+이러한 컬렉션에 대한 쿼리(`find`)는 서버와 통신하지 않고 이 캐시에서 직접 제공됩니다.
 
 - 클라이언트에서 데이터베이스에 쓸 때(`insert`, `update`, `remove`),
   명령이 로컬에서 즉시 실행되는 동시에 서버로 전송되어 그곳에서도 실행됩니다.
@@ -92,10 +119,16 @@ meteor remove autopublish
 
 그리고나서 `Meteor.publish`를 사용하여 컬렉션의 어떤 부분을 어떤 사용자에게 퍼블리시 할 것인지 지정합니다.
 
+:::warning
+Minimongo에는 현재 인덱스가 없습니다.
+클라이언트가 색인이 가치 있는 충분한 데이터를 가지고 있는 경우가 드물기 때문에 이것이 문제가 되는 경우는 드뭅니다.
+:::
 
+## find()
 
-
-
+- 사용: 모든곳
+- 설명: 컬렉션에서 셀렉터와 일치하는 문서를 찾습니다.
+- 예제:
 
 
 
